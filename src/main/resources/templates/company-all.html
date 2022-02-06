@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All companies</title>
+</head>
+<body>
+
+<h2>Companies from (in memory) DB</h2>
+
+
+
+<div th:each="cpu : ${allCompaniesFromDB}">
+    <div th:text="${company.id}"></div>
+    <div th:text="${company.name}"></div>
+    <div th:text="${cpu.cpus} "></div>
+    <div><a th:href="@{/company/edit/{id}(id=${company.id})}">Edit</a></div>
+    <div><a th:href="@{/company/delete/{id}(id=${company.id})}">Delete</a></div>
+    ------------------------------------------
+    <br>
+</div>
+</body>
+</html>tml>

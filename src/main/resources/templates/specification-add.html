@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Specification edit webpage</title>
+</head>
+<body>
+<h2> Add Specificaton </h2>
+<form action="#" method="post"  th:action="@{/specification/add}" th:object="${specification}">
+
+    <div><label>frequency</label><input type ="text" th:field="*{frequency}"></div>
+    <div th:if="${#fields.hasErrors('frequency')}" th:errors="*{frequency}"> frequency error </div>
+    <div><label>cores</label><input type ="text" th:field="*{cores}"></div>
+    <div th:if="${#fields.hasErrors('cores')}" th:errors="*{cores}"> Core count error </div>
+    <div><label>tdp</label><input type ="text" th:field="*{tdp}"></div>
+    <div th:if="${#fields.hasErrors('tdp')}" th:errors="*{tdp}">TDP error </div>
+    <div><input type ="submit" th:value="Submit"></div>
+
+    <!-- <div th:if="${#fields.hasErrors('*')}">
+        <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p> -->
+
+</form>
+</body>
+</html>

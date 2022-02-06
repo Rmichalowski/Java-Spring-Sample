@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Cpu edit webpage</title>
+</head>
+<body>
+<h2> Edit CPU </h2>
+
+<form action="#" method="post"  th:action="@{/cpu/update/} + ${id}" th:object="${cpuToUpdate}">
+    <div><input type ="text" th:field="*{name}"></div>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> name error </div>
+
+    <div><select class="form-control" name="specification">
+        <option th:each="specification : ${allSpecification}"
+                th:selected="${cpuToUpdate.specification.id.equals(specification.id)}"
+                th:value="${specification.id}"
+                th:text="${specification.frequency}">specification frequency</option>
+    </select></div>
+
+    <div><select class="form-control" name="compatibleMobos" multiple="multiple">
+        <option th:each="compatibleMobos : ${allCompatibleMobos}"
+                th:selected="${cpuToUpdate.compatibleMobos.contains(compatibleMobos)}"
+                th:value="${compatibleMobos.id}"
+                th:text="${compatibleMobos.name}">compatibleMobos name</option>
+    </select></div>
+
+
+
+    <div><input type ="submit" th:value="Submit"></div>
+
+
+
+</form>
+</body>
+</html>

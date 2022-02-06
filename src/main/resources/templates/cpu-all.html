@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>All cpu's</title>
+</head>
+<body>
+
+<h2>Cpus from (in memory) DB</h2>
+
+    <div><a th:href="@{/specification/add}">Specification Add</a></div>
+    <div><a th:href="@{/compatibleMobos/add}">CompatibleMobos Add</a></div>
+    <div><a th:href="@{/cpu/add}">Cpu Add</a></div>
+
+
+
+<table class="table table-dark table-hover table-striped">
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>name</td>
+            <td>frequency,cores,tdp</td>
+            <td>mobos names,manufacturer</td>
+            <td> </td>
+            <td> </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="cpu : ${allCpusFromDB}">
+                <td th:text="${cpu.id}"></td>
+                <td th:text="${cpu.name}"></td>
+                <td th:each="specification : ${cpu.specification} ">
+                    <p th:text="${specification.Frequency}
+                    + ' ' + ${specification.Cores}
+                    + ' ' + ${specification.Tdp}"></p>
+                </td>
+                <td >
+                    <div th:each="compatibleMobos : ${cpu.compatibleMobos} ">
+                        <span th:text="${compatibleMobos.name} + ' ' +
+                         ${compatibleMobos.manufacturer}">
+                        </span>
+                    </div>
+                </td>
+                <td><a type="button" class="btn btn-warning" th:href="@{/cpu/update/{id}(id=${cpu.id})}">Edit</a></td>
+                <td><a type="button" class="btn btn-danger"  th:href="@{/cpu/delete/{id}(id=${cpu.id})}">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
